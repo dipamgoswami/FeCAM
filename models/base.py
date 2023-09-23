@@ -198,8 +198,8 @@ class BaseLearner(object):
         mask = off_diag != 0.0
         off_diag_mean = (off_diag*mask).sum() / mask.sum()
         iden = torch.eye(cov.shape[0])
-        alpha1 = 1
-        alpha2  = 1
+        alpha1 = self.args["alpha1"]
+        alpha2  = self.args["alpha2"]
         cov_ = cov + (alpha1*diag_mean*iden) + (alpha2*off_diag_mean*(1-iden))
         return cov_
     
@@ -226,7 +226,7 @@ class BaseLearner(object):
         return cov
 
     def _tukeys_transform(self, x):
-        beta = 0.5  # self.args.beta
+        beta = self.args["beta"]
         x = torch.tensor(x)
         if beta == 0:
             return torch.log(x)
