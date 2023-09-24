@@ -180,7 +180,7 @@ class BaseLearner(object):
             class_means = self._tukeys_transform(class_means)
         x_minus_mu = F.normalize(vectors, p=2, dim=-1) - F.normalize(class_means, p=2, dim=-1)
         if cov is None:
-            cov = torch.eye(self._network.feature_dim)
+            cov = torch.eye(self._network.feature_dim)  # identity covariance matrix for euclidean distance
         inv_covmat = torch.linalg.pinv(cov).float().cuda()
         left_term = torch.matmul(x_minus_mu, inv_covmat)
         mahal = torch.matmul(left_term, x_minus_mu.T)
