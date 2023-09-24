@@ -156,7 +156,9 @@ class BaseLearner(object):
             if self._cur_task == 0:
                 dist = self._mahalanobis(vectors, init_means[class_index])
             else:
-                if self.args["full_cov"]:
+                if self.args["ncm"]:
+                    dist = self._mahalanobis(vectors, class_means[class_index])
+                elif self.args["full_cov"]:
                     if self.args["per_class"]:
                         if self.args["norm_cov"]:
                             dist = self._mahalanobis(vectors, class_means[class_index], self._norm_cov_mat[class_index])
