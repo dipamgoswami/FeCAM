@@ -22,6 +22,7 @@
     "beta": 0.5,
     "alpha1": 1,
     "alpha2": 1,
+    "ncm": false,
     "tukey" : true,
     "diagonal" : false,
     "per_class" : true,
