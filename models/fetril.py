@@ -1,18 +1,3 @@
-'''
-
-results on CIFAR-100: 
-               
-           |   Reported  Resnet18        |  Reproduced Resnet32 
-Protocols  |  Reported FC | Reported SVM |  Reproduced FC | Reproduced SVM |  
-
-T = 5      |   64.7       |  66.3        |  65.775        | 65.375         |
-
-T = 10     |   63.4       |  65.2        |  64.91         | 65.10          |
-
-T = 60     |   50.8       |  59.8        |  62.09         | 61.72          |
-
-'''
-
 
 import logging
 import numpy as np
