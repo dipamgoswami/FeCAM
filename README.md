@@ -43,7 +43,7 @@ The framework for many-shot CIL setting is taken from [PyCIL](https://github.com
 
 Other algorithm-specific hyperparameters can be modified in the corresponding json files. There are options to use NCM Classifier instead of FeCAM.
 
-## To run FeCAM using pre-trained visual transformers
+## To use FeCAM with pre-trained visual transformers
 
 ### Dependencies
 1. [torch 1.81](https://github.com/pytorch/pytorch)
