@@ -49,8 +49,9 @@ Other algorithm-specific hyperparameters can be modified in the corresponding js
 1. [torch 1.81](https://github.com/pytorch/pytorch)
 2. [torchvision 0.6.0](https://github.com/pytorch/vision)
 3. [numpy](https://github.com/numpy/numpy)
-4. [timm](https://pypi.org/project/timm/)
-5. [continuum](https://pypi.org/project/continuum/)
+4. [tqdm](https://github.com/tqdm/tqdm)
+5. [timm](https://pypi.org/project/timm/)
+6. [continuum](https://pypi.org/project/continuum/)
 
 ### Run experiment
 
