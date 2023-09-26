@@ -13,18 +13,38 @@ Exemplar-free class-incremental learning (CIL) poses several challenges since it
 }
 ```
 
-## Dependencies
-1. torch 1.81
-2. torchvision 0.6.0
-3. tqdm
-4. numpy
-5. scipy
+The framework for many-shot CIL setting is taken from [PyCIL](https://github.com/G-U-N/PyCIL).
 
-## To run the experiments
+## To run the many-shot CIL experiments
+
+### Dependencies
+1. [torch 1.81](https://github.com/pytorch/pytorch)
+2. [torchvision 0.6.0](https://github.com/pytorch/vision)
+3. [tqdm](https://github.com/tqdm/tqdm)
+4. [numpy](https://github.com/numpy/numpy)
+5. [scipy](https://github.com/scipy/scipy)
+
 1. Edit the exps/[Model name].json to change the experiment settings.
-2. Run
-   ` python main.py --config==exps/fecam.json`
+2. Run the following command for FeCAM
+   
+   ```
+    python main.py --config==exps/fecam.json
+   ```
+3. Hyperparameters:
+  - **memory-size**: The total exemplar number in the incremental learning process. We do not need to store exemplars for FecAM.
+  - **init-cls**: The number of classes in the first incremental stage. 
+  - **increment**: The number of classes in each incremental stage. 
+  - **convnet-type**: The backbone network for the incremental model. We use `ResNet18` for all the experiments .
+  - **seed**: The random seed adopted for shuffling the class order. According to the benchmark setting of PyCIL, it is set to 1993 by default.
+  - **beta**: The degree of feature transformation using Tukey’s Ladder of Powers Transformation.
+  - **alpha1, alpha2**: The hyperparameters for covariance shrinkage.
+
+Other algorithm-specific hyperparameters can be modified in the corresponding json files. There are options to use NCM Classifier instead of FeCAM.
+
+## To run FeCAM using pre-trained visual transformers
 
 
 
-This repository is a modified version of [PyCIL](https://github.com/G-U-N/PyCIL).
+
+Code for the few-shot CIL experiments will be available soon.
+
