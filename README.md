@@ -13,9 +13,9 @@ Exemplar-free class-incremental learning (CIL) poses several challenges since it
 }
 ```
 
-The framework for many-shot CIL setting is taken from [PyCIL](https://github.com/G-U-N/PyCIL).
+## For many-shot CIL experiments
 
-## To run the many-shot CIL experiments
+The framework for many-shot CIL setting is taken from [PyCIL](https://github.com/G-U-N/PyCIL).
 
 ### Dependencies
 1. [torch 1.81](https://github.com/pytorch/pytorch)
@@ -23,6 +23,8 @@ The framework for many-shot CIL setting is taken from [PyCIL](https://github.com
 3. [tqdm](https://github.com/tqdm/tqdm)
 4. [numpy](https://github.com/numpy/numpy)
 5. [scipy](https://github.com/scipy/scipy)
+
+### Run experiment
 
 1. Edit the exps/[Model name].json to change the experiment settings.
 2. Run the following command for FeCAM
@@ -43,8 +45,23 @@ Other algorithm-specific hyperparameters can be modified in the corresponding js
 
 ## To run FeCAM using pre-trained visual transformers
 
+### Dependencies
+1. [torch 1.81](https://github.com/pytorch/pytorch)
+2. [torchvision 0.6.0](https://github.com/pytorch/vision)
+3. [numpy](https://github.com/numpy/numpy)
+4. [timm](https://pypi.org/project/timm/)
+5. [continuum](https://pypi.org/project/continuum/)
 
+### Run experiment
 
+1. Run the following command:
+
+```
+python FeCAM_vit_{dataset}.py
+```
+2. The hyperparameters can be modified in the corresponding python files.
+
+## For few-shot CIL experiments
 
 Code for the few-shot CIL experiments will be available soon.
 
