@@ -24,6 +24,16 @@ The framework for many-shot CIL setting is taken from [PyCIL](https://github.com
 4. [numpy](https://github.com/numpy/numpy)
 5. [scipy](https://github.com/scipy/scipy)
 
+### Datasets
+
+We performed experiments for `CIFAR100`, `ImageNet100,` and `TinyImageNet`. When training on `CIFAR100`, this framework will automatically download it.  When training on `ImageNet100` or `TinyImageNet`, you should specify the folder of your dataset in `utils/data.py`.
+
+```python
+    def download_data(self):
+        train_dir = '[DATA-PATH]/train/'
+        test_dir = '[DATA-PATH]/val/'
+```
+
 ### Run experiment
 
 1. Edit the exps/[Model name].json to change the experiment settings.
