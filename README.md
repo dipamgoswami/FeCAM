@@ -62,6 +62,10 @@ Other algorithm-specific hyperparameters can be modified in the corresponding js
 4. [tqdm](https://github.com/tqdm/tqdm)
 5. [timm](https://pypi.org/project/timm/)
 6. [continuum](https://pypi.org/project/continuum/)
+   
+### Datasets
+
+Download the ImageNet-R and CoRe50 datasets.
 
 ### Run experiment
 
@@ -70,7 +74,11 @@ Other algorithm-specific hyperparameters can be modified in the corresponding js
 ```
 python FeCAM_vit_{dataset}.py
 ```
-2. The hyperparameters can be modified in the corresponding python files.
+2. The hyperparameters can be modified in the corresponding python files. To try the NCM classifier, run the following command:
+
+```
+python NCM_vit_{dataset}.py
+```
 
 ## For few-shot CIL experiments
 
