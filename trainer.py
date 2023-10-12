@@ -56,20 +56,20 @@ def _train(args):
     )
     model = factory.get_model(args["model_name"], args)
 
-    cnn_curve, nme_curve, maha_curve = {"top1": [], "top5": []}, {"top1": [], "top5": []}, {"top1": [], "top5": []}
+    cnn_curve, nme_curve, fecam_curve = {"top1": [], "top5": []}, {"top1": [], "top5": []}, {"top1": [], "top5": []}
     for task in range(data_manager.nb_tasks):
         logging.info("All params: {}".format(count_parameters(model._network)))
         logging.info(
             "Trainable params: {}".format(count_parameters(model._network, True))
         )
         model.incremental_train(data_manager)
-        cnn_accy, nme_accy, maha_accy = model.eval_task()
+        cnn_accy, nme_accy, fecam_accy = model.eval_task()
         model.after_task()
 
-        if nme_accy is not None and maha_accy is None:
+        if nme_accy is not None and fecam_accy is None:
             logging.info("CNN: {}".format(cnn_accy["grouped"]))
             logging.info("NME: {}".format(nme_accy["grouped"]))
-            logging.info("No MAHA accuracy.")
+            logging.info("No FeCAM accuracy.")
 
             cnn_curve["top1"].append(cnn_accy["top1"])
             cnn_curve["top5"].append(cnn_accy["top5"])
@@ -81,31 +81,31 @@ def _train(args):
             logging.info("CNN top5 curve: {}".format(cnn_curve["top5"]))
             logging.info("NME top1 curve: {}".format(nme_curve["top1"]))
             logging.info("NME top5 curve: {}\n".format(nme_curve["top5"]))
-        elif maha_accy is not None and cnn_accy is not None:
+        elif fecam_accy is not None and cnn_accy is not None:
             logging.info("CNN: {}".format(cnn_accy["grouped"]))
             logging.info("No NME accuracy")
-            logging.info("MAHA: {}".format(maha_accy["grouped"]))
+            logging.info("FeCAM: {}".format(fecam_accy["grouped"]))
 
             cnn_curve["top1"].append(cnn_accy["top1"])
             cnn_curve["top5"].append(cnn_accy["top5"])
 
-            maha_curve["top1"].append(maha_accy["top1"])
-            maha_curve["top5"].append(maha_accy["top5"])
+            fecam_curve["top1"].append(fecam_accy["top1"])
+            fecam_curve["top5"].append(fecam_accy["top5"])
 
             logging.info("CNN top1 curve: {}".format(cnn_curve["top1"]))
             logging.info("CNN top5 curve: {}".format(cnn_curve["top5"]))
-            logging.info("MAHA top1 curve: {}".format(maha_curve["top1"]))
-            logging.info("MAHA top5 curve: {}\n".format(maha_curve["top5"]))
-        elif maha_accy is not None:
+            logging.info("FeCAM top1 curve: {}".format(fecam_curve["top1"]))
+            logging.info("FeCAM top5 curve: {}\n".format(fecam_curve["top5"]))
+        elif fecam_accy is not None:
             logging.info("No CNN accuracy")
             logging.info("No NME accuracy")
-            logging.info("MAHA: {}".format(maha_accy["grouped"]))
+            logging.info("FeCAM: {}".format(fecam_accy["grouped"]))
 
-            maha_curve["top1"].append(maha_accy["top1"])
-            maha_curve["top5"].append(maha_accy["top5"])
+            fecam_curve["top1"].append(fecam_accy["top1"])
+            fecam_curve["top5"].append(fecam_accy["top5"])
 
-            logging.info("MAHA top1 curve: {}".format(maha_curve["top1"]))
-            logging.info("MAHA top5 curve: {}\n".format(maha_curve["top5"]))
+            logging.info("FeCAM top1 curve: {}".format(fecam_curve["top1"]))
+            logging.info("FeCAM top5 curve: {}\n".format(fecam_curve["top5"]))
         else:
             logging.info("No NME accuracy.")
             logging.info("CNN: {}".format(cnn_accy["grouped"]))
