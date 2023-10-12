@@ -9,7 +9,6 @@
     "convnet_type": "resnet18",
     "device": ["0"],
     "seed": [1993],
-    "shot": [1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000],
     "init_epochs": 200,
     "init_lr" : 0.1,
     "init_weight_decay" : 5e-4,
