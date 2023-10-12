@@ -40,7 +40,7 @@ We performed experiments for `CIFAR100`, `ImageNet100,` and `TinyImageNet`. When
 2. Run the following command for FeCAM
    
    ```
-    python main.py --config==exps/fecam.json
+    python main.py --config=exps/FeCAM_{dataset}.json
    ```
 3. Hyperparameters:
   - **memory-size**: The total exemplar number in the incremental learning process. We do not need to store exemplars for FecAM.
