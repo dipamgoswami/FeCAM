@@ -14,7 +14,7 @@ from utils.inc_net import CosineIncrementalNet, FOSTERNet, IncrementalNet
 from utils.toolkit import count_parameters, target2onehot, tensor2numpy
 from torchvision import datasets, transforms
 from utils.autoaugment import CIFAR10Policy,ImageNetPolicy
-from utils.maha_utils import compute_base_common_cov, compute_new_common_cov, compute_base_cov, compute_new_cov
+from utils.maha_utils import compute_common_cov, compute_new_common_cov, compute_new_cov
 
 EPSILON = 1e-8
 
@@ -120,17 +120,17 @@ class FeCAM(BaseLearner):
             self._build_protos()
             if self.args["full_cov"]:
                 if self.args["per_class"]:
-                    compute_base_cov(self)
+                    compute_new_cov(self)
                     if self.args["shrink"]:  # we apply covariance shrinkage 2 times to obtain better estimates of matrices
                         for cov in self._cov_mat:
                             self._cov_mat_shrink.append(self.shrink_cov(cov))
                     if self.args["norm_cov"]:
                         self._norm_cov_mat = self.normalize_cov()
                 else:
-                    self._common_cov = compute_base_common_cov(train_loader, self)
+                    self._common_cov = compute_common_cov(train_loader, self)
             elif self.args["diagonal"]:
                 if self.args["per_class"]:
-                    compute_base_cov(self)
+                    compute_new_cov(self)
                     for cov in self._cov_mat:
                         self._cov_mat_shrink.append(self.shrink_cov(cov))
                     for cov in self._cov_mat_shrink:
