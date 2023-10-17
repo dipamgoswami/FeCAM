@@ -148,7 +148,7 @@ class BaseLearner(object):
     
 
     def _maha_dist(self, vectors, init_means, class_means):
-        vectors = torch.tensor(vectors).cuda()
+        vectors = torch.tensor(vectors).to(self._device)
         if self.args["tukey"] and self._cur_task > 0:
             vectors = self._tukeys_transform(vectors)
         maha_dist = []
@@ -181,7 +181,7 @@ class BaseLearner(object):
         x_minus_mu = F.normalize(vectors, p=2, dim=-1) - F.normalize(class_means, p=2, dim=-1)
         if cov is None:
             cov = torch.eye(self._network.feature_dim)  # identity covariance matrix for euclidean distance
-        inv_covmat = torch.linalg.pinv(cov).float().cuda()
+        inv_covmat = torch.linalg.pinv(cov).float().to(self._device)
         left_term = torch.matmul(x_minus_mu, inv_covmat)
         mahal = torch.matmul(left_term, x_minus_mu.T)
         return torch.diagonal(mahal, 0).cpu().numpy()
