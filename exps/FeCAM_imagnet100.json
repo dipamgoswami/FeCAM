@@ -12,8 +12,6 @@
     "init_epochs": 200,
     "init_lr" : 0.1,
     "init_weight_decay" : 5e-4,
-    "epochs" : 200,
-    "lr" : 0.05,
     "batch_size" : 128,
     "weight_decay" : 5e-4,
     "num_workers" : 8,
