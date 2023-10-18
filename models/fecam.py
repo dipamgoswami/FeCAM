@@ -51,14 +51,8 @@ class FeCAM(BaseLearner):
             ]
         elif self.args['dataset'] == "tinyimagenet200":
             self.data_manager._train_trsf = [
-                transforms.RandomResizedCrop(224),
+                transforms.RandomCrop(32, padding=4),
                 transforms.RandomHorizontalFlip(),
-                transforms.ToTensor(),
-                transforms.ToPILImage()
-            ]
-            self.data_manager._test_trsf = [
-                transforms.Resize(256),
-                transforms.CenterCrop(224),
                 transforms.ToTensor(),
                 transforms.ToPILImage()
             ]
