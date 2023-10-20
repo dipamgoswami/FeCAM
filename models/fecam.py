@@ -131,7 +131,7 @@ class FeCAM(BaseLearner):
                         cov = self.normalize_cov2(cov)
                         self._diag_mat.append(self.diagonalization(cov))
         else:
-            self._cov_mat_shrink, self._diag_mat = [], []
+            self._cov_mat_shrink, self._norm_cov_mat, self._diag_mat = [], [], []
             self._network.to(self._device)
             if hasattr(self._network, "module"):
                 self._network_module_ptr = self._network.module
