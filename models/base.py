@@ -18,29 +18,10 @@ class BaseLearner(object):
         self._total_classes = 0
         self._network = None
         self._old_network = None
-        self._data_memory, self._targets_memory = np.array([]), np.array([])
         self.topk = 5
 
-        self._memory_size = args["memory_size"]
-        self._memory_per_class = args.get("memory_per_class", None)
-        self._fixed_memory = args.get("fixed_memory", False)
         self._device = args["device"][0]
         self._multiple_gpus = args["device"]
-
-    @property
-    def exemplar_size(self):
-        assert len(self._data_memory) == len(
-            self._targets_memory
-        ), "Exemplar size error."
-        return len(self._targets_memory)
-
-    @property
-    def samples_per_class(self):
-        if self._fixed_memory:
-            return self._memory_per_class
-        else:
-            assert self._total_classes != 0, "Total classes is 0"
-            return self._memory_size // self._total_classes
 
     @property
     def feature_dim(self):
@@ -48,13 +29,6 @@ class BaseLearner(object):
             return self._network.module.feature_dim
         else:
             return self._network.feature_dim
-
-    def build_rehearsal_memory(self, data_manager, per_class):
-        if self._fixed_memory:
-            self._construct_exemplar_unified(data_manager, per_class)
-        else:
-            self._reduce_exemplar(data_manager, per_class)
-            self._construct_exemplar(data_manager, per_class)
 
     def save_checkpoint(self, filename):
         self._network.cpu()
@@ -98,12 +72,6 @@ class BaseLearner(object):
 
     def _train(self):
         pass
-
-    def _get_memory(self):
-        if len(self._data_memory) == 0:
-            return None
-        else:
-            return (self._data_memory, self._targets_memory)
 
     def _compute_accuracy(self, model, loader):
         model.eval()
@@ -215,16 +183,14 @@ class BaseLearner(object):
             sd = torch.sqrt(torch.diagonal(cov))  # standard deviations of the variables
             cov = cov/(torch.matmul(sd.unsqueeze(1),sd.unsqueeze(0)))
             norm_cov_mat.append(cov)
-        
+            
         print(len(norm_cov_mat))
-        return norm_cov_mat
-    
+        return norm_cov_mat    
     
     def normalize_cov2(self, cov):
         diag = torch.diagonal(cov)
         norm = torch.linalg.norm(diag)
         cov = cov /norm
-
         return cov
 
     def _tukeys_transform(self, x):
