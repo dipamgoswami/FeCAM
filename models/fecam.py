@@ -10,10 +10,10 @@ from torch import linalg as LA
 from torch.nn import functional as F
 from torch.utils.data import DataLoader,Dataset
 from models.base import BaseLearner
-from utils.inc_net import CosineIncrementalNet, FOSTERNet, IncrementalNet
+from utils.inc_net import CosineIncrementalNet, IncrementalNet
 from utils.toolkit import count_parameters, target2onehot, tensor2numpy
 from torchvision import datasets, transforms
-from utils.autoaugment import CIFAR10Policy,ImageNetPolicy
+from utils.autoaugment import CIFAR10Policy
 from utils.maha_utils import compute_common_cov, compute_new_common_cov, compute_new_cov
 
 EPSILON = 1e-8
@@ -78,7 +78,7 @@ class FeCAM(BaseLearner):
         self.shot = None
 
         train_dataset = data_manager.get_dataset(np.arange(self._known_classes, self._total_classes), source='train',
-                                                 mode='train', shot=self.shot, appendent=self._get_memory())  
+                                                 mode='train', shot=self.shot)  
 
         self.train_loader = DataLoader(
             train_dataset, batch_size=self.args["batch_size"], shuffle=True, num_workers=self.args["num_workers"], pin_memory=True)
@@ -170,7 +170,7 @@ class FeCAM(BaseLearner):
                 idx_loader = DataLoader(idx_dataset, batch_size=self.args["batch_size"], shuffle=False, num_workers=4)
                 vectors, _ = self._extract_vectors(idx_loader)
                 class_mean = np.mean(vectors, axis=0)
-                self._protos.append(torch.tensor(class_mean).cuda())
+                self._protos.append(torch.tensor(class_mean).to(self._device)
 
     def _update_fc(self):
         self._network.fc.fc2.weight.data = torch.stack(self._protos[-self.args["increment"]:], dim=0).to(self._device)  # for cosine incremental fc layer
