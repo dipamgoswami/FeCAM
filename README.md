@@ -55,6 +55,10 @@ We performed experiments for `CIFAR100`, `ImageNet100,` and `TinyImageNet`. When
 
 Other algorithm-specific hyperparameters can be modified in the corresponding json files. There are options to use NCM Classifier instead of FeCAM.
 
+### Trained weights
+
+The trained weights for the first task used in our experiments can be found [here](https://cvcuab-my.sharepoint.com/:f:/g/personal/dgoswami_cvc_uab_cat/EgAOPrZ7ctJKrQBd0oICUJgBqP0DKVh6Y9MVBnbUkschFg?e=cG6Trb)
+
 ## To use FeCAM with pre-trained visual transformers
 
 ### Dependencies
