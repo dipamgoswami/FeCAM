@@ -35,6 +35,7 @@ We performed experiments for `CIFAR100`, `ImageNet100,` and `TinyImageNet`. When
         train_dir = '[DATA-PATH]/train/'
         test_dir = '[DATA-PATH]/val/'
 ```
+To download ImageNet-Subset dataset: [Link](https://www.kaggle.com/datasets/arjunashok33/imagenet-subset-for-inc-learn)
 
 ### Run experiment
 
