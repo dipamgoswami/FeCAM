@@ -89,5 +89,7 @@ python NCM_vit_{dataset}.py
 
 ## For few-shot CIL experiments
 
-Code for the few-shot CIL experiments will be available soon.
+FeCAM can be used in combination with differnt few-shot learning approaches. In our paper, we use FeCAM with two recent works, [ALICE](https://github.com/CanPeng123/FSCIL_ALICE) and [FACT](https://github.com/zhoudw-zdw/CVPR22-Fact). 
+
+The code can be used as a plug-in in different codebases by adding the two components: the FeCAM classifier from [models/base.py](https://github.com/dipamgoswami/FeCAM/blob/main/models/base.py) and a utils function which performs the transformations and computes the covariance matrices like in [utils/maha_utils.py](https://github.com/dipamgoswami/FeCAM/blob/main/utils/maha_utils.py).
 
