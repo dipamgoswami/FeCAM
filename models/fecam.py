@@ -170,7 +170,7 @@ class FeCAM(BaseLearner):
                 idx_loader = DataLoader(idx_dataset, batch_size=self.args["batch_size"], shuffle=False, num_workers=4)
                 vectors, _ = self._extract_vectors(idx_loader)
                 class_mean = np.mean(vectors, axis=0)
-                self._protos.append(torch.tensor(class_mean).to(self._device)
+                self._protos.append(torch.tensor(class_mean).to(self._device))
 
     def _update_fc(self):
         self._network.fc.fc2.weight.data = torch.stack(self._protos[-self.args["increment"]:], dim=0).to(self._device)  # for cosine incremental fc layer
