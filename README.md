@@ -66,7 +66,7 @@ The code for using FeCAM in the Avalanche codebase is now available.
 
 Refer to [fecam.py](https://github.com/ContinualAI/avalanche/blob/master/avalanche/models/fecam.py) for the FeCAM classifier code and [update_fecam.py](https://github.com/ContinualAI/avalanche/blob/master/avalanche/training/plugins/update_fecam.py) for the utils with adiitional settings to explore using FeCAM classifier with memory buffer and also the oracle setting (upper bound when computing mean and covariance matrix from all old data seen so far).
 
-## To use FeCAM with pre-trained visual transformers
+## To use FeCAM with pre-trained vision transformers
 
 ### Dependencies
 1. [torch 1.81](https://github.com/pytorch/pytorch)
